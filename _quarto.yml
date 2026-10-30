@@ -1,0 +1,70 @@
+project:
+  type: book
+
+book:
+  title: "Engenharia de IA"
+  subtitle: "Anotações de estudo da trilha da equipe"
+  author: "Gabriel"
+  date: last-modified
+  date-format: "DD/MM/YYYY"
+  chapters:
+    - index.md
+    - seguranca.qmd
+
+lang: pt
+number-depth: 2
+# URLs soltas no texto viram links (clicáveis e quebráveis no PDF)
+from: markdown+autolink_bare_uris
+
+format:
+  html:
+    theme: cosmo
+
+  pdf:
+    # O TinyTeX daqui não tem o pacote de português (babel-portuges) e a rede
+    # bloqueia a instalação. O LaTeX roda em inglês e os rótulos são traduzidos
+    # abaixo. Instalado o pacote, dá pra apagar esta linha e o bloco de rótulos.
+    lang: en
+    documentclass: scrreprt
+    classoption: [oneside, open=any]
+    papersize: a4
+    fontsize: 11pt
+    linestretch: 1.2
+    geometry:
+      - top=2.5cm
+      - bottom=2.5cm
+      - left=3cm
+      - right=2.5cm
+    # Fontes do Windows: dispensam instalar fonte no LaTeX
+    mainfont: Cambria
+    sansfont: Calibri
+    monofont: Consolas
+    toc: true
+    toc-depth: 2
+    toc-title: "Sumário"
+    colorlinks: true
+    linkcolor: "NavyBlue"
+    urlcolor: "NavyBlue"
+    include-in-header:
+      text: |
+        % Sem padrões de hifenização em português: não quebra palavras
+        \usepackage[none]{hyphenat}
+        \setlength{\emergencystretch}{3em}
+        % URLs longas quebram em qualquer caractere
+        \usepackage{url}
+        \makeatletter
+        \g@addto@macro{\UrlBreaks}{\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z\do\-}
+        \makeatother
+        \addto\captionsenglish{%
+          \renewcommand{\contentsname}{Sumário}%
+          \renewcommand{\chaptername}{Capítulo}%
+          \renewcommand{\figurename}{Figura}%
+          \renewcommand{\tablename}{Tabela}%
+        }
+        \usepackage{scrlayer-scrpage}
+        \clearpairofpagestyles
+        \automark[section]{chapter}
+        \ihead{\headmark}
+        \ohead{\pagemark}
+        \setkomafont{pageheadfoot}{\small\sffamily\color{gray}}
+        \KOMAoptions{headsepline=0.4pt}
